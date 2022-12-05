@@ -1,0 +1,10 @@
+pydicom
+numpy
+pyside6
+pyopengl
+pyinstaller
+opencv-python
+matplotlib
+pillow
+pandas
+tensorflow
