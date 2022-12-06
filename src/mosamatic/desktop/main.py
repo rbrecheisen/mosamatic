@@ -1,16 +1,13 @@
 import sys
 
-
-from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QApplication, QLabel
+from PySide6.QtWidgets import QApplication
+from mainwindow import MainWindow
 
 
 def main():
     application = QApplication(sys.argv)
-    label = QLabel('Hello, world')
-    label.setAlignment(Qt.AlignCenter)
-    label.setMinimumSize(300, 100)
-    label.show()
+    window = MainWindow()
+    window.show()
     sys.exit(application.exec())
 
 
