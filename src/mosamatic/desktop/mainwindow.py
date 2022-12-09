@@ -7,6 +7,8 @@ from PIL import Image, ImageQt
 from PySide6.QtGui import QGuiApplication, QPalette, QPixmap
 from PySide6.QtWidgets import QApplication, QMainWindow, QScrollArea, QLabel, QSizePolicy
 
+from utils import DicomImage
+
 
 class MainWindow(QMainWindow):
 
@@ -27,19 +29,10 @@ class MainWindow(QMainWindow):
         self.load_and_set_image()
 
     def load_and_set_image(self):
-        p = pydicom.dcmread('../resources/01_001.dcm')
-        # Make sure to copy NumPy array to prevent segmentation faults
-        pixels = p.pixel_array.copy()
-        # Normalize pixel values between [0, 1]
-        minimum, maximum = np.min(pixels), np.max(pixels)
-        pixels = (pixels - minimum) / (maximum - minimum)
-        # Scale to [0, 255]
-        pixels *= 255
-        # Create Pillow image and Qt image
-        image = Image.fromarray(np.uint8(pixels))
-        image_qt = ImageQt.ImageQt(image)
-        # Display it and adjust geometry of display label
-        self.imageLabel.setPixmap(QPixmap.fromImage(image_qt))
+        dcm_image = DicomImage('../resources/01_001.dcm')
+        pixels = dcm_image.get_pixels_normalized_255()
+        image = ImageQt.ImageQt(Image.fromarray(pixels))
+        self.imageLabel.setPixmap(QPixmap.fromImage(image))
         self.imageLabel.adjustSize()
         self.scrollArea.setVisible(True)
 
