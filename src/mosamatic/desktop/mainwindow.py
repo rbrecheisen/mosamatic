@@ -1,4 +1,6 @@
 import sys
+
+import numpy as np
 import pydicom
 
 from PIL import Image, ImageQt
@@ -26,14 +28,15 @@ class MainWindow(QMainWindow):
         self.load_and_set_image()
 
     def load_and_set_image(self):
-        # p = pydicom.dcmread('../resources/01_001.dcm')
-        # image = Image.fromarray(p.pixel_array.copy())
-        # imageqt = ImageQt.ImageQt(image)
-        # self.imageLabel.setPixmap(QPixmap.fromImage(imageqt))
-        # self.imageLabel.adjustSize()
-        # self.scrollArea.setVisible(True)
-        # TODO: Try normal image first!
-        pass
+        p = pydicom.dcmread('../resources/01_001.dcm')
+        pixels = p.pixel_array.copy()
+        minimum, maximum = np.min(pixels), np.max(pixels)
+        pixels = (pixels - minimum) / (maximum - minimum)
+        image = Image.fromarray(np.uint8(pixels * 255))
+        image_qt = ImageQt.ImageQt(image)
+        self.imageLabel.setPixmap(QPixmap.fromImage(image_qt))
+        self.imageLabel.adjustSize()
+        self.scrollArea.setVisible(True)
 
 
 def main():
