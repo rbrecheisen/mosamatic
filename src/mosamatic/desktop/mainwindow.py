@@ -15,7 +15,6 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle('Mosamatic Desktop')
-        self.image = None
         self.imageLabel = QLabel()
         self.imageLabel.setBackgroundRole(QPalette.Base)
         self.imageLabel.setSizePolicy(QSizePolicy.Ignored, QSizePolicy.Ignored)
@@ -29,8 +28,9 @@ class MainWindow(QMainWindow):
         self.load_and_set_image()
 
     def load_and_set_image(self):
-        dcm_image = DicomImage('../resources/01_001.dcm')
-        pixels = dcm_image.get_pixels_normalized_255()
+        dcm_image = DicomImage()
+        dcm_image.apply_window((400, 50))  # TODO: create window presets!
+        pixels = dcm_image.normalize_255()
         image = ImageQt.ImageQt(Image.fromarray(pixels))
         self.imageLabel.setPixmap(QPixmap.fromImage(image))
         self.imageLabel.adjustSize()
