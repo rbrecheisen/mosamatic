@@ -39,8 +39,9 @@ class DicomImage:
         pixels = (pixels + np.abs(minimum)) / (maximum - minimum)
         return pixels
 
-    def normalize_255(self, pixels):
-        pixels = self.normalize(pixels)
+    @staticmethod
+    def normalize_255(pixels):
+        pixels = DicomImage.normalize(pixels)
         pixels = np.uint8(pixels * 255)
         return pixels
 

@@ -44,7 +44,7 @@ class MainWindow(QMainWindow):
         self.update_image_display(self.image)
 
     def update_image_display(self, image):
-        pixels = image.normalize_255(image.pixels)
+        pixels = DicomImage.normalize_255(image.pixels)
         image = ImageQt.ImageQt(Image.fromarray(pixels))
         self.imageLabel.setPixmap(QPixmap.fromImage(image))
         self.imageLabel.adjustSize()
