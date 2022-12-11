@@ -1,6 +1,7 @@
 import sys
 
 from PIL import Image, ImageQt
+from PySide6.QtCore import Qt
 from PySide6.QtGui import QGuiApplication, QPalette, QPixmap
 from PySide6.QtWidgets import QApplication, QMainWindow, QScrollArea, QLabel, QSizePolicy, \
     QHBoxLayout, QVBoxLayout, QWidget, QPushButton, QSpacerItem
@@ -10,11 +11,24 @@ from utils import DicomImage
 
 class MainWindow(QMainWindow):
 
+    NORMAL = 0
+    ZOOM = 1
+    PAN = 2
+    DEFAULT = NORMAL
+
+    STATUS_MESSAGES = {
+        NORMAL: 'Status: NORMAL',
+        ZOOM: 'Status: ZOOM',
+        PAN: 'Status: PAN',
+    }
+
     def __init__(self):
         super().__init__()
         self.setWindowTitle('Mosamatic Desktop')
         self.image = None
         self.scaleFactor = 1.0
+        self.status = None
+        self.previous_state = None
         self.imageLabel = QLabel()
         self.imageLabel.setBackgroundRole(QPalette.Base)
         self.imageLabel.setSizePolicy(QSizePolicy.Ignored, QSizePolicy.Ignored)
@@ -47,7 +61,16 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(self.main_widget)
         self.available_size = QGuiApplication.primaryScreen().availableSize()
         self.resize(self.available_size)
+        self.set_status(MainWindow.DEFAULT)
         self.load_image()
+
+    def set_status(self, status):
+        self.previous_state = self.status
+        self.status = status
+        status_text = MainWindow.STATUS_MESSAGES[self.status]
+        if self.previous_state is not None and self.status != MainWindow.NORMAL:
+            status_text += ' (previous: {})'.format(MainWindow.STATUS_MESSAGES[self.previous_state])
+        self.statusBar().showMessage(status_text)
 
     def load_image(self):
         self.image = DicomImage()
@@ -87,6 +110,22 @@ class MainWindow(QMainWindow):
     @staticmethod
     def adjust_scrollbar(scrollbar, factor):
         scrollbar.setValue(int(factor * scrollbar.value() + ((factor - 1) * scrollbar.pageStep() / 2)))
+
+    def keyPressEvent(self, event):
+        if event.key() == Qt.Key.Key_R:
+            self.set_status(MainWindow.NORMAL)
+        elif event.key() == Qt.Key.Key_N:
+            self.set_status(MainWindow.NORMAL)
+        elif event.key() == Qt.Key.Key_Z:
+            self.set_status(MainWindow.ZOOM)
+        elif event.key() == Qt.Key.Key_P:
+            self.set_status(MainWindow.PAN)
+        else:
+            pass
+
+    def mouseReleaseEvent(self, event):
+        # Get mouse coordinates
+        pass
 
 
 def main():
