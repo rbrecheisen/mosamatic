@@ -75,7 +75,6 @@ class MainWindow(QMainWindow):
     def load_image(self):
         self.image = DicomImage()
         self.preset_selected()
-        # self.update_image_display(self.image)
 
     def update_image_display(self, image):
         pixels = DicomImage.normalize_255(image.pixels)
@@ -124,6 +123,10 @@ class MainWindow(QMainWindow):
             self.set_status(MainWindow.PAN)
         else:
             pass
+
+    def mousePressEvent(self, event):
+        if self.status == MainWindow.ZOOM:
+            self.zoom_in()
 
 
 def main():
