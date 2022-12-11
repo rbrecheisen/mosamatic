@@ -47,7 +47,7 @@ class MainWindow(QMainWindow):
         self.buttonZoomFitWindow = QPushButton('Fit window')
         self.buttonZoomFitWindow.clicked.connect(self.zoom_fit_window)
         self.button_layout = QVBoxLayout()
-        self.button_layout.addWidget(self.buttonPreset)
+        # self.button_layout.addWidget(self.buttonPreset)
         self.button_layout.addWidget(self.buttonZoomOut)
         self.button_layout.addWidget(self.buttonZoomIn)
         self.button_layout.addWidget(self.buttonZoomReset)
@@ -59,7 +59,7 @@ class MainWindow(QMainWindow):
         self.main_widget = QWidget()
         self.main_widget.setLayout(self.main_layout)
         self.setCentralWidget(self.main_widget)
-        self.available_size = QGuiApplication.primaryScreen().availableSize()
+        self.available_size = QGuiApplication.primaryScreen().availableSize()  # Take MainWindow.size() instead
         self.resize(self.available_size)
         self.set_status(MainWindow.DEFAULT)
         self.load_image()
@@ -74,7 +74,8 @@ class MainWindow(QMainWindow):
 
     def load_image(self):
         self.image = DicomImage()
-        self.update_image_display(self.image)
+        self.preset_selected()
+        # self.update_image_display(self.image)
 
     def update_image_display(self, image):
         pixels = DicomImage.normalize_255(image.pixels)
@@ -104,6 +105,7 @@ class MainWindow(QMainWindow):
     def scale_image(self, factor):
         self.scaleFactor *= factor
         self.imageLabel.resize(self.scaleFactor * self.imageLabel.pixmap().size())
+        self.imageLabel.setGeometry(0, 0, self.imageLabel.width(), self.imageLabel.height())
         self.adjust_scrollbar(self.scrollArea.horizontalScrollBar(), factor)
         self.adjust_scrollbar(self.scrollArea.verticalScrollBar(), factor)
 
@@ -122,10 +124,6 @@ class MainWindow(QMainWindow):
             self.set_status(MainWindow.PAN)
         else:
             pass
-
-    def mouseReleaseEvent(self, event):
-        # Get mouse coordinates
-        pass
 
 
 def main():
