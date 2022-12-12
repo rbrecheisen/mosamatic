@@ -27,7 +27,7 @@ class MainWindow(QMainWindow):
         self.setWindowTitle('Mosamatic Desktop')
         self.image = None
         self.scaleFactor = 1.0
-        self.status = None
+        self.state = None
         self.previous_state = None
         self.imageLabel = QLabel()
         self.imageLabel.setBackgroundRole(QPalette.Base)
@@ -54,6 +54,7 @@ class MainWindow(QMainWindow):
         self.button_layout.addWidget(self.buttonZoomFitWindow)
         self.button_layout.addItem(QSpacerItem(1, 1, QSizePolicy.Preferred, QSizePolicy.Expanding))
         self.main_layout = QHBoxLayout()
+        self.main_layout.setContentsMargins(0, 0, 0, 0)
         self.main_layout.addWidget(self.scrollArea)
         self.main_layout.addLayout(self.button_layout)
         self.main_widget = QWidget()
@@ -61,16 +62,16 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(self.main_widget)
         self.available_size = QGuiApplication.primaryScreen().availableSize()  # Take MainWindow.size() instead
         self.resize(self.available_size)
-        self.set_status(MainWindow.DEFAULT)
+        self.set_state(MainWindow.DEFAULT)
         self.load_image()
 
-    def set_status(self, status):
-        self.previous_state = self.status
-        self.status = status
-        status_text = MainWindow.STATUS_MESSAGES[self.status]
-        if self.previous_state is not None and self.status != MainWindow.NORMAL:
-            status_text += ' (previous: {})'.format(MainWindow.STATUS_MESSAGES[self.previous_state])
-        self.statusBar().showMessage(status_text)
+    def set_state(self, status):
+        self.previous_state = self.state
+        self.state = status
+        state_text = MainWindow.STATUS_MESSAGES[self.state]
+        if self.previous_state is not None and self.state != MainWindow.NORMAL:
+            state_text += ' (previous: {})'.format(MainWindow.STATUS_MESSAGES[self.previous_state])
+        self.statusBar().showMessage(state_text)
 
     def load_image(self):
         self.image = DicomImage()
@@ -104,7 +105,6 @@ class MainWindow(QMainWindow):
     def scale_image(self, factor):
         self.scaleFactor *= factor
         self.imageLabel.resize(self.scaleFactor * self.imageLabel.pixmap().size())
-        self.imageLabel.setGeometry(0, 0, self.imageLabel.width(), self.imageLabel.height())
         self.adjust_scrollbar(self.scrollArea.horizontalScrollBar(), factor)
         self.adjust_scrollbar(self.scrollArea.verticalScrollBar(), factor)
 
@@ -114,19 +114,26 @@ class MainWindow(QMainWindow):
 
     def keyPressEvent(self, event):
         if event.key() == Qt.Key.Key_R:
-            self.set_status(MainWindow.NORMAL)
+            self.set_state(MainWindow.NORMAL)
         elif event.key() == Qt.Key.Key_N:
-            self.set_status(MainWindow.NORMAL)
+            self.set_state(MainWindow.NORMAL)
         elif event.key() == Qt.Key.Key_Z:
-            self.set_status(MainWindow.ZOOM)
+            self.set_state(MainWindow.ZOOM)
         elif event.key() == Qt.Key.Key_P:
-            self.set_status(MainWindow.PAN)
+            self.set_state(MainWindow.PAN)
         else:
             pass
 
     def mousePressEvent(self, event):
-        if self.status == MainWindow.ZOOM:
-            self.zoom_in()
+        if self.state == MainWindow.ZOOM:
+            x = event.position().x()
+            y = event.position().y()
+            self.imageLabel.setGeometry(
+                x,
+                y,
+                self.imageLabel.width(),
+                self.imageLabel.height(),
+            )
 
 
 def main():
