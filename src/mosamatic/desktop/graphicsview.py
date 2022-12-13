@@ -13,7 +13,7 @@ class GraphicsView(QGraphicsView):
 
     def __init__(self, scene):
         super().__init__(scene)
-        self.setDragMode(GraphicsView.DragMode.ScrollHandDrag)
+        self.setDragMode(GraphicsView.DragMode.ScrollHandDrag)  # move this to set_state()
 
     def wheelEvent(self, event):
         zoom_in_factor = 1.1
