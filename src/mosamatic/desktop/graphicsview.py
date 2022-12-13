@@ -42,6 +42,7 @@ def main():
     pixels = image.apply_window((400, 50), image.pixels)
     pixels = DicomImage.normalize_255(pixels)
     pixmap_image = ImageQt.ImageQt(Image.fromarray(pixels))
+    # TODO: Add all images to scene at once so you can easily switch using visibility!
     scene_item1 = scene.addPixmap(QPixmap.fromImage(pixmap_image))
     scene_item1.setVisible(True)
     view = GraphicsView(scene)
