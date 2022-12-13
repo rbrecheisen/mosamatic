@@ -7,32 +7,16 @@ from PySide6.QtGui import QPixmap, QTransform
 
 from utils import DicomImage
 
-# TODO: implement mouse cursor zooming
-# https://stackoverflow.com/questions/19113532/qgraphicsview-zooming-in-and-out-under-mouse-position-using-mouse-wheel
 
-
+# TODO: Implement separate states for zooming (Z) and panning (P)
 class GraphicsView(QGraphicsView):
-
-    NORMAL = 0
-    ZOOM = 1
-    PAN = 2
-
-    STATUS_MESSAGES = {
-        NORMAL: 'NORMAL',
-        ZOOM: 'ZOOM',
-        PAN: 'PAN',
-    }
 
     def __init__(self, scene):
         super().__init__(scene)
-        self.state = None
-        self.set_state(GraphicsView.NORMAL)
-
-    def set_state(self, state):
-        pass
+        self.setDragMode(GraphicsView.DragMode.ScrollHandDrag)
 
     def wheelEvent(self, event):
-        zoom_in_factor = 1.25
+        zoom_in_factor = 1.1
         zoom_out_factor = 1 / zoom_in_factor
         self.setTransformationAnchor(QGraphicsView.ViewportAnchor.NoAnchor)
         self.setResizeAnchor(QGraphicsView.ViewportAnchor.NoAnchor)
