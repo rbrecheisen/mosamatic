@@ -5,7 +5,7 @@ from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QApplication, QGraphicsScene, QGraphicsView
 from PySide6.QtGui import QPixmap, QTransform
 
-from mosamatic.desktop.utils import DicomImage
+from mosamatic.core.dicom import DicomImage
 
 
 # TODO: Implement separate states for zooming (Z) and panning (P)
