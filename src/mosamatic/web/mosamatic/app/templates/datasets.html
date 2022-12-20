@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row"><p style="margin-top: 10px"><a href="/tasks/">Tasks</a></p></div>
+    <div class="row">
+        <div class="col-sm-10">
+            <div class="card" style="margin-top: 10px;">
+                <div class="card-header">Datasets</div>
+                <div class="card-body">
+                    <form action="/datasets/" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <label for="files">Select files:</label>
+                        <input type="file" id="files" name="files" multiple/><br><br>
+                        <button type="submit" class="btn btn-primary">Upload</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-10">
+            <div class="card" style="margin-top: 10px;">
+                <div class="card-header">Loaded datasets</div>
+                <div class="card-body">
+                    <table class="table">
+                        <tr>
+                            <th>Dataset name</th>
+                            <th>Commands</th>
+                        </tr>
+                        {% for dataset in datasets %}
+                            <tr>
+                                <td><a href="/datasets/{{ dataset.id }}">{{ dataset.name }}</a></td>
+                                {%  if user == dataset.owner or user.is_staff %}
+                                    <td>[<a href="/datasets/{{ dataset.id }}?action=delete">delete</a>]</td>
+                                {% else %}
+                                    <td><i>None permitted</i></td>
+                                {%  endif %}
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

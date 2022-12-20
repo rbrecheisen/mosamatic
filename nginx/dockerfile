@@ -1,0 +1,14 @@
+FROM alpine:latest
+
+ENV NGINX_VERSION 1.21.4
+
+COPY install.sh /usr/src/
+COPY nginx.key /usr/src/
+
+RUN sh -x /usr/src/install.sh
+
+COPY nginx.conf /etc/nginx/nginx.conf
+
+EXPOSE 80 443
+
+CMD ["nginx", "-g", "daemon off;"]

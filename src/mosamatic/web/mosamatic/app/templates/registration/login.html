@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card" style="margin-top: 10px;">
+                <div class="card-header">Login</div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.non_field_errors }}
+                        <!--{{ form.as_p }}-->
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            {{ form.username.errors }}
+                            <input type="input" class="form-control" name="username" id="username"
+                                   placeholder="Username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            {{ form.password.errors }}
+                            <input type="password" class="form-control" name="password" id="password"
+                                   placeholder="Password" aria-describedby="info" required>
+                        </div>
+                        <div id="info" class="form-text">
+                            Click <a href="/accounts/password_reset/">here</a> to reset your password<br>
+                            Click <a href="/admin/">here</a> to go to the administration page<br>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

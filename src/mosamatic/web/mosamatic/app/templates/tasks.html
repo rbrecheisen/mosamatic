@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row"><p style="margin-top: 10px"><a href="/datasets/">Datasets</a></p></div>
+    <div class="row">
+        <div class="col-sm-10">
+            <div class="card" style="margin-top: 10px;">
+                <div class="card-header">Tasks</div>
+                <div class="card-body">
+                    <h5>What do you want to do?</h5>
+                    <form action="/tasks/" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <select class="form-select" name="task_type_id">
+                            <option selected>Please select a task</option>
+                            {% for task_type in task_types %}
+                                <option value="{{ task_type.id }}">{{ task_type.display_name }}</option>
+                            {% endfor %}
+                        </select>
+                        <br>
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-10">
+            <div class="card" style="margin-top: 10px;">
+                <div class="card-header">
+                    Task jobs
+                    <span style="float: right">
+                        <input
+                                type="checkbox"
+                                class="form-check-input"
+                                id="auto-refresh"
+                                onclick="autoRefresh();"
+                                {% if auto_refresh %} checked {% endif %}>
+                        <label class="form-check-label" for="auto-refresh">Auto-refresh</label>
+                        <script>
+                            function autoRefresh() {
+                                let href = window.location.href;
+                                if(document.getElementById('auto-refresh').checked) {
+                                    if(href.endsWith('?auto-refresh=1') === false) {
+                                        href = window.location.href + '?auto-refresh=1';
+                                    }
+                                } else {
+                                    if(href.endsWith('?auto-refresh=1')) {
+                                        href = href.substring(0, href.length - 15);
+                                    }
+                                }
+                                window.location = href;
+                            }
+                        </script>
+                    </span>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <tr>
+                            <th>Description</th>
+                            <th>Created</th>
+                            <th>Status</th>
+                            <th>Commands</th>
+                        </tr>
+                        {% for task in tasks %}
+                            <tr>
+                                <td>
+                                    <a href="/tasks/{{ task.id }}">{{ task.task_type.display_name }}</a>
+                                    {% if task.errors %}
+                                        <br>
+                                        <br>
+                                        <ul>
+                                            {% for error in task.errors %}
+                                                <li style="color: red; font-size: small"><i>{{ error }}</i></li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+                                </td>
+                                <td>{% if task.created %} {{ task.created|date:"l d-m-Y @ H:i:s" }} {% else %} - {% endif %}</td>
+                                <td>{% if task.job_status %} {{ task.job_status }} {% else %} - {% endif %}</td>
+                                <td>
+                                    [<a href="/tasks/{{ task.id }}?action=cancel">cancel</a>]&nbsp;
+                                    [<a href="/tasks/{{ task.id }}?action=delete">delete</a>]
+                                    [<a href="/tasks/">refresh</a>]
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                    <a href="/tasks/?action=cancel">
+                        <button class="btn btn-primary">Cancel all tasks</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

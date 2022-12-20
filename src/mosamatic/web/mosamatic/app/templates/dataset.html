@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load extra_filters %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row"><p style="margin-top: 10px"><a href="/datasets/">Back</a></p></div>
+    <div class="row">
+        <div class="col-sm-10">
+            <div class="card" style="margin-top: 10px;">
+                <div class="card-header">
+                    Dataset <b>{{ dataset.name }}</b><br>
+                    <i style="font-size: small;">
+                        id: {{ dataset.id }}, owner: {{ dataset.owner }}, public: {{ dataset.public }}
+                    </i>
+                </div>
+                <div class="card-body">
+                    {% if user == dataset.owner or user.is_staff %}
+                        <form action="/datasets/{{ dataset.id }}" method="get">
+                            <input type="hidden" name="action" value="rename">
+                            <input type="text" class="form-control" placeholder="Enter new name" name="new_name"><br>
+                            <button class="btn btn-primary">Rename</button>
+                        </form>
+                        <p><a href="/datasets/{{ dataset.id }}?action=download">Download dataset</a></p>
+                        <p><a href="/datasets/{{ dataset.id }}?action=delete">Delete</a></p>
+                    {%  endif %}
+                    {%  if user == dataset.owner %}
+                        <p><a href="/datasets/{{ dataset.id }}?action=make-public">Make public for other users</a></p>
+                        <p><a href="/datasets/{{ dataset.id }}?action=make-private">Make private</a></p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-10">
+            <div class="card" style="margin-top: 10px;">
+                <div class="card-header">Files</b></div>
+                <div class="card-body">
+                    <ul class="list-group">
+                        {% for f in files %}
+                            <li class="list-group-item">
+                                {% if f.name|endswith:"png" %}
+                                    <a href="{{ f.path }}">{{ f.name }}</a>
+                                {% elif f.name|endswith:"txt" %}
+                                    <a href="{{ f.path }}">{{ f.name }}</a>
+                                {% elif f.name|endswith:"json" %}
+                                    <a href="{{ f.path }}">{{ f.name }}</a>
+                                {% else %}
+                                    {{ f.name }}
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

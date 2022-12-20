@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+{% load crispy_forms_tags %}
+<div class="container-fluid">
+    <div class="row"><p style="margin-top: 10px"><a href="/tasks/">Back</a></p></div>
+    <div class="row">
+        <div class="col-sm-10">
+            <div class="card" style="margin-top: 10px;">
+                <div class="card-header"><b>{{ task.task_type.display_name }}</b></div>
+                <div class="card-body">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-10">
+            <div class="card" style="margin-top: 10px;">
+                <div class="card-header">Parameters</div>
+                <div class="card-body">
+                    <form action="/tasks/{{ task.id }}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ task_form|crispy }}
+                        <button class="btn btn-primary">Start</button>&nbsp;
+                    </form>
+                    <a href="/tasks/{{ task.id }}?action=cancel"><button class="btn btn-primary">Cancel</button></a>&nbsp;
+                    <a href="/tasks/{{ task.id }}?action=delete"><button class="btn btn-primary">Delete</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
