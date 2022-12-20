@@ -357,6 +357,25 @@ TASK_TYPES = [
         ]
     },
     {
+        'name': 'TotalSegmentator',
+        'display_name': 'Automatically segment 104 structures in a CT scan',
+        'class_path': 'app.tasks.totalsegmentator.task.TotalSegmentatorTaskJob',
+        'parameters': [
+            {
+                'name': 'input',
+                'display_name': 'Flat file list for single DICOM series',
+                'data_type': 'dataset',
+                'required': True,
+            },
+            {
+                'name': 'output_dataset_name',
+                'display_name': 'Output dataset name',
+                'data_type': 'str',
+                'required': False,
+            },
+        ]
+    },
+    {
         'name': 'ConvertDpcaExportToCastorImport',
         'display_name': 'Convert Castor DPCA export to CSVs that can be imported into Castor',
         'class_path': 'app.tasks.castor.dpca_new.ConvertDpcaExportToCastorImportTaskJob',
@@ -395,245 +414,3 @@ TASK_TYPES = [
         ]
     },
 ]
-
-# TASK_TYPES = {
-#     'PredictBodyComposition': {
-#         'display_name': 'BODY COMPOSITION: Run analysis',
-#         'class_path': 'app.tasks.bodycomposition.predict.PredictBodyCompositionTaskJob',
-#         'parameters': [
-#             {
-#                 'name': 'tensorflow_model_files',
-#                 'display_name': 'TensorFlow model files',
-#                 'data_type': 'dataset',
-#                 'required': True,
-#             },
-#             {
-#                 'name': 'l3_images',
-#                 'display_name': 'L3 images',
-#                 'data_type': 'dataset',
-#                 'required': True
-#             },
-#             {
-#                 'name': 'output_dataset_name',
-#                 'display_name': 'Output dataset name',
-#                 'data_type': 'str',
-#                 'required': False
-#             },
-#         ]
-#     },
-#     'ValidateBodyCompositionLearningModel': {
-#         'display_name': 'BODY COMPOSITION: Validate prediction model',
-#         'class_path': 'app.tasks.bodycomposition.validate.ValidateModelTaskJob',
-#         'parameters': [
-#             {
-#                 'name': 'tensorflow_model_files',
-#                 'display_name': 'TensorFlow model files',
-#                 'data_type': 'dataset',
-#                 'required': True,
-#             },
-#             {
-#                 'name': 'l3_images_and_tag_files',
-#                 'display_name': 'L3 images and TAG files',
-#                 'data_type': 'dataset',
-#                 'required': True
-#             },
-#             {
-#                 'name': 'output_dataset_name',
-#                 'display_name': 'Output dataset name',
-#                 'data_type': 'str',
-#                 'required': False
-#             },
-#         ]
-#     },
-#     'CheckDicomsBodyComposition': {
-#         'display_name': 'BODY COMPOSITION: Check if DICOM files suitable for analysis',
-#         'class_path': 'app.tasks.bodycomposition.checkdicoms.CheckDicomsTaskJob',
-#         'parameters': [
-#             {
-#                 'name': 'input',
-#                 'display_name': 'DICOM files',
-#                 'data_type': 'dataset',
-#                 'required': True,
-#             },
-#             {
-#                 'name': 'extensions_to_ignore',
-#                 'display_name': 'Comma-separated list of extensions to ignore, e.g., "txt,png,csv"',
-#                 'data_type': 'list',
-#                 'required': False,
-#             },
-#             {
-#                 'name': 'add_ignored_files_to_output',
-#                 'display_name': 'Add ignored files to output',
-#                 'data_type': 'bool',
-#                 'default_value': True,
-#             },
-#             {
-#                 'name': 'required_attributes',
-#                 'display_name': 'Comma-separated list of required DICOM attributes',
-#                 'data_type': 'list',
-#                 'required': True,
-#                 'default_value': 'PixelSpacing,Rows,Columns,RescaleSlope,RescaleIntercept,PixelData,BitsStored'
-#             },
-#             {
-#                 'name': 'rows',
-#                 'display_name': 'Rows',
-#                 'data_type': 'int',
-#                 'required': True,
-#                 'default_value': 512,
-#                 'min_value': 0,
-#                 'max_value': 1000,
-#             },
-#             {
-#                 'name': 'columns',
-#                 'display_name': 'Columns',
-#                 'data_type': 'int',
-#                 'required': True,
-#                 'default_value': 512,
-#                 'min_value': 0,
-#                 'max_value': 1000,
-#             },
-#             {
-#                 'name': 'bits_stored',
-#                 'display_name': 'Bits Stored',
-#                 'data_type': 'int',
-#                 'required': True,
-#                 'default_value': 16,
-#                 'min_value': 8,
-#                 'max_value': 64,
-#             },
-#             {
-#                 'name': 'output_dataset_name',
-#                 'display_name': 'Output dataset name',
-#                 'data_type': 'str',
-#                 'required': False,
-#             }
-#         ]
-#     },
-#     'DicomToRaw': {
-#         'display_name': 'DICOM: Convert compressed files to raw format',
-#         'class_path': 'app.tasks.dcm2raw.task.DicomToRawTaskJob',
-#         'parameters': [
-#             {
-#                 'name': 'input',
-#                 'display_name': 'Compressed DICOM files',
-#                 'data_type': 'dataset',
-#                 'required': True,
-#             },
-#             {
-#                 'name': 'output_dataset_name',
-#                 'display_name': 'Output dataset name',
-#                 'data_type': 'str',
-#                 'required': False,
-#             },
-#         ],
-#     },
-#     'TagToDicom': {
-#         'display_name': 'DICOM: Convert TAG files to DICOM',
-#         'class_path': 'app.tasks.tag2dcm.task.TagToDicomTaskJob',
-#         'parameters': [
-#             {
-#                 'name': 'input',
-#                 'display_name': 'DICOM and TAG files',
-#                 'data_type': 'dataset',
-#                 'required': True,
-#             },
-#             {
-#                 'name': 'output_dataset_name',
-#                 'display_name': 'Output dataset name',
-#                 'data_type': 'str',
-#                 'required': False,
-#             },
-#         ]
-#     },
-#     'DicomToPng': {
-#         'display_name': 'DICOM: Convert DICOM files to PNG images',
-#         'class_path': 'app.tasks.dcm2png.task.DicomToPngTaskJob',
-#         'parameters': [
-#             {
-#                 'name': 'input',
-#                 'display_name': 'DICOM files',
-#                 'data_type': 'dataset',
-#                 'required': True,
-#             },
-#             {
-#                 'name': 'normalize_enabled',
-#                 'display_name': 'Enable normalization',
-#                 'data_type': 'bool',
-#                 'required': False,
-#             },
-#             {
-#                 'name': 'window_width',
-#                 'display_name': 'Window width',
-#                 'data_type': 'int',
-#                 'required': False,
-#             },
-#             {
-#                 'name': 'window_level',
-#                 'display_name': 'Window level',
-#                 'data_type': 'int',
-#                 'required': False,
-#             },
-#             {
-#                 'name': 'output_dataset_name',
-#                 'display_name': 'Output dataset name',
-#                 'data_type': 'str',
-#                 'required': False,
-#             }
-#         ]
-#     },
-#     'ConvertDpcaExportToCastorImport': {
-#         'display_name': 'CASTOR: Convert DPCA export to Castor import CSVs',
-#         'class_path': 'app.tasks.castor.dpca_new.ConvertDpcaExportToCastorImportTaskJob',
-#         'parameters': [
-#             {
-#                 'name': 'dpca_export_file',
-#                 'display_name': 'DPCA export CSV file',
-#                 'data_type': 'dataset',
-#                 'required': True,
-#             },
-#             {
-#                 'name': 'castor_dpca_export_file',
-#                 'display_name': 'Latest Castor export CSV file',
-#                 'data_type': 'dataset',
-#                 'required': True,
-#             },
-#             {
-#                 'name': 'date_columns',
-#                 'display_name': 'Date columns',
-#                 'data_type': 'list',
-#                 'required': True,
-#                 'default_value': 'gebdat,behperdat,verwijsdat,beelddat,draindat,cythistdat,datpreopmdo,neoadjdat,datok,reintvdat,datdrainverw,palliadat,adjudat,datont,datcom',
-#             },
-#             {
-#                 'name': 'starting_record_nr',
-#                 'display_name': 'Starting record number',
-#                 'data_type': 'int',
-#                 'required': True,
-#             },
-#             {
-#                 'name': 'output_dataset_name',
-#                 'display_name': 'Output dataset name',
-#                 'data_type': 'str',
-#                 'required': False,
-#             }
-#         ]
-#     },
-#     'DicomToNifti': {
-#         'display_name': 'DICOM: Convert a single DICOM series to single NIFTI',
-#         'class_path': 'app.tasks.dcm2nifti.task.DicomToNiftiTaskJob',
-#         'parameters': [
-#             {
-#                 'name': 'input',
-#                 'display_name': 'DICOM series',
-#                 'data_type': 'dataset',
-#                 'required': True,
-#             },
-#             {
-#                 'name': 'output_dataset_name',
-#                 'display_name': 'Output dataset name',
-#                 'data_type': 'str',
-#                 'required': False,
-#             }
-#         ]
-#     }
-# }
