@@ -1,6 +1,6 @@
 FROM tensorflow/tensorflow:2.3.0-gpu
 
-MAINTAINER Ralph Brecheisen <r.brecheisen@maastrichtuniversity.nl>
+# Ralph Brecheisen <r.brecheisen@maastrichtuniversity.nl>
 
 COPY src/mosamatic/web/mosamatic /src
 COPY requirements-web.txt /requirements.txt
@@ -21,6 +21,8 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys A4B469963BF863CC &&
     pip install uwsgi gunicorn && \
     mkdir -p /data/static && \
     mkdir -p /data/uploads/{0..9} && chmod 777 -R /data/uploads
+
+RUN chown -R mosamatic: /data
 
 WORKDIR /src
 
