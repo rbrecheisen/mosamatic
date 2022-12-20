@@ -21,8 +21,9 @@ class TotalSegmentatorTaskJob(TaskJob):
         if len(files) > 1:
             raise Exception(f'Only one NIFTI file supported! Found {len(files)}')
         for f in files:
-            print(f'Processing {f.path} and segmenting structures...')
-            os.system(f'TotalSegmentator -i {f.path} -o {output_dataset.data_dir}')
+            cmd = f'TotalSegmentator -i {f.path} -o {output_dataset.data_dir}'
+            print(f'Running command {cmd}')
+            subprocess.check_output(cmd)
             for f_seg in os.listdir(output_dataset.data_dir):
                 f_seg_path = os.path.join(output_dataset.data_dir, f_seg)
                 self.create_output_file(f_seg_path, output_dataset)
