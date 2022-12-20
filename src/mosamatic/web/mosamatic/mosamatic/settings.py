@@ -330,6 +330,13 @@ TASK_TYPES = [
                 'required': True,
             },
             {
+                'name': 'series',
+                'display_name': 'Treat DICOM files as single series',
+                'data_type': 'bool',
+                'required': False,
+                'default_value': True,
+            },
+            {
                 'name': 'output_dataset_name',
                 'display_name': 'Output dataset name',
                 'data_type': 'str',
