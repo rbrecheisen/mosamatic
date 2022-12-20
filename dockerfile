@@ -7,7 +7,7 @@ COPY requirements-web.txt /requirements.txt
 COPY create-users.txt /
 COPY docker-entrypoint.sh /
 
-RUN useradd mosamatic
+RUN useradd --create-home mosamatic
 
 # apt-get update -y gave errors regarding NVIDIA public key
 # https://chrisjean.com/fix-apt-get-update-the-following-signatures-couldnt-be-verified-because-the-public-key-is-not-available/
