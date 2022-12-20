@@ -16,15 +16,15 @@ class TotalSegmentatorTaskJob(TaskJob):
 
     def execute(self):
         self.task_job_begin()
-        input_dataset = self.get_input_dataset(self.task.parameters['input'])
-        output_dataset = self.create_output_dataset(name=self.task.parameters['output_dataset_name'])
-        fast = self.get_bool(self.task.parameters['fast'])
+        input_dataset = self.get_input_dataset(self.task.get_param('input'))
+        output_dataset = self.create_output_dataset(name=self.task.get_param('output_dataset_name'))
+        fast = self.get_bool(self.task.get_param('fast'))
         if fast:
             fast = '--fast'
-        statistics = self.get_bool(self.task.parameters['statistics'])
+        statistics = self.get_bool(self.task.get_param('statistics'))
         if statistics:
             statistics = '--statistics'
-        radiomics = self.get_bool(self.task.parameters['radiomics'])
+        radiomics = self.get_bool(self.task.get_param('radiomics'))
         if radiomics:
             radiomics = '--radiomics'
         files = self.get_files(input_dataset)
