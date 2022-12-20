@@ -368,6 +368,18 @@ TASK_TYPES = [
                 'required': True,
             },
             {
+                'name': 'statistics',
+                'display_name': 'Generate statistics (volume and mean HU)',
+                'data_type': 'bool',
+                'required': False,
+            },
+            {
+                'name': 'radiomics',
+                'display_name': 'Generate radiomics features (requires pyradiomics)',
+                'data_type': 'bool',
+                'required': False,
+            },
+            {
                 'name': 'output_dataset_name',
                 'display_name': 'Output dataset name',
                 'data_type': 'str',
