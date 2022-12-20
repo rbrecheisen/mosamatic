@@ -7,11 +7,14 @@ COPY requirements-web.txt /requirements.txt
 COPY create-users.txt /
 COPY docker-entrypoint.sh /
 
+RUN useradd mosamatic
+
 # apt-get update -y gave errors regarding NVIDIA public key
 # https://chrisjean.com/fix-apt-get-update-the-following-signatures-couldnt-be-verified-because-the-public-key-is-not-available/
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys A4B469963BF863CC && \
     apt-get update -y && \
-    apt-get install -y vim libpq-dev pkg-config cmake openssl wget git vim libgl1-mesa-glx && \
+    apt-get install -y vim libpq-dev pkg-config cmake openssl wget git vim  && \
+    apt-get install -y libgl1-mesa-glx libxrender1 \
     pip install --upgrade pip && \
     pip install -r /requirements.txt && \
     pip install uwsgi gunicorn && \
@@ -30,5 +33,7 @@ RUN apt-get autoremove -y && \
 # ENV ENV=/root/.profile
 # RUN echo "rm -rf /src/* && rm /root/.bashrc && rm /root/.profile" > /root/.bashrc
 # RUN echo "rm -rf /src/* && rm /root/.bashrc && rm /root/.profile" > /root/.profile
+
+USER mosamatic
 
 CMD ["/docker-entrypoint.sh"]
