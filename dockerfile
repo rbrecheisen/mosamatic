@@ -3,7 +3,7 @@ FROM tensorflow/tensorflow:2.3.0-gpu
 MAINTAINER Ralph Brecheisen <r.brecheisen@maastrichtuniversity.nl>
 
 COPY src/mosamatic/web/mosamatic /src
-COPY requirements-web.txt /
+COPY requirements-web.txt /requirements.txt
 COPY create-users.txt /
 COPY docker-entrypoint.sh /
 
