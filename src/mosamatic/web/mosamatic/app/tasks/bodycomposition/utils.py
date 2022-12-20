@@ -4,8 +4,8 @@ import zipfile
 import logging
 import numpy as np
 
-from barbell2 import tag2npy
-from barbell2.utils import get_tag_file_for_dicom, is_dicom_file
+from barbell2.imaging import tag2npy
+from barbell2.imaging.utils import get_tag_file_for_dicom, is_dicom_file
 
 logger = logging.getLogger(__name__)
 

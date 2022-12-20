@@ -1,8 +1,8 @@
 import os
 import shutil
 
-from barbell2 import tag2dcm
-from barbell2.utils import get_tag_file_for_dicom, is_dicom_file
+from barbell2.imaging import tag2dcm
+from barbell2.imaging.utils import get_tag_file_for_dicom, is_dicom_file
 from .. import TaskJob, TaskForm
 
 

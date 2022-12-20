@@ -3,7 +3,7 @@ import shutil
 import logging
 import pydicom
 
-from barbell2.utils import is_dicom_file
+from barbell2.imaging.utils import is_dicom_file
 from .. import TaskJob, TaskForm
 
 logger = logging.getLogger(__name__)

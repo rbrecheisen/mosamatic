@@ -6,8 +6,8 @@ import pandas as pd
 
 from .. import TaskJob, TaskForm
 from .utils import *
-from barbell2 import npy2png, npy2dcm, dcm2npy, tag2npy, tag2dcm
-from barbell2.utils import get_pixels, get_tag_pixels
+from barbell2.imaging import npy2png, npy2dcm, dcm2npy, tag2npy, tag2dcm
+from barbell2.imaging.utils import get_pixels, get_tag_pixels
 
 logger = logging.getLogger(__name__)
 

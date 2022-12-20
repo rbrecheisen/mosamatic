@@ -1,8 +1,8 @@
 import os
 
 from .. import TaskJob, TaskForm
-from barbell2 import dcm2npy, npy2png
-from barbell2.utils import is_dicom_file
+from barbell2.imaging import dcm2npy, npy2png
+from barbell2.imaging.utils import is_dicom_file
 
 
 class DicomToPngTaskForm(TaskForm):

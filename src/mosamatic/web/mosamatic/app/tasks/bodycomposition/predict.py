@@ -5,8 +5,8 @@ import pydicom
 import pydicom.errors
 import logging
 
-from barbell2.utils import get_pixels
-from barbell2 import npy2png, npy2dcm, dcm2npy
+from barbell2.imaging.utils import get_pixels
+from barbell2.imaging import npy2png, npy2dcm, dcm2npy
 from .. import TaskJob, TaskForm
 from .utils import *
 
