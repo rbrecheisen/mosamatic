@@ -19,17 +19,21 @@ class TotalSegmentatorTaskJob(TaskJob):
         self.task_job_begin()
         input_dataset = self.get_input_dataset(self.task.parameters['input'])
         output_dataset = self.create_output_dataset(name=self.task.parameters['output_dataset_name'])
+        fast = self.get_bool(self.task.parameters['fast'])
+        if fast:
+            fast = '--fast'
+        statistics = self.get_bool(self.task.parameters['statistics'])
+        if statistics:
+            statistics = '--statistics'
+        radiomics = self.get_bool(self.task.parameters['radiomics'])
+        if radiomics:
+            radiomics = '--radiomics'
         files = self.get_files(input_dataset)
-        if len(files) > 1:
-            raise Exception(f'Only one NIFTI file supported! Found {len(files)}')
-        logger.info('Processing file...')
-        for f in files:
-            cmd = f'TotalSegmentator -i {f.path} -o {output_dataset.data_dir}'
-            logger.info(f'Running command {cmd}')
-            os.system(cmd)
-            for f_seg in os.listdir(output_dataset.data_dir):
-                f_seg_path = os.path.join(output_dataset.data_dir, f_seg)
-                self.create_output_file(f_seg_path, output_dataset)
-                logger.info(f'Added {f_seg_path}')
-            break
+        cmd = f'TotalSegmentator {statistics} {radiomics} {fast} -i {files[0].path} -o {output_dataset.data_dir}'
+        logger.info(f'Running command: {cmd}')
+        os.system(cmd)
+        for f in os.listdir(output_dataset.data_dir):
+            f_path = os.path.join(output_dataset.data_dir, f)
+            self.create_output_file(f_path, output_dataset)
+            logger.info(f'Added {f_path}')
         self.task_job_end()
