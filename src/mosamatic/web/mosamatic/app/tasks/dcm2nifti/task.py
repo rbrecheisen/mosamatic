@@ -18,7 +18,7 @@ class DicomToNiftiTaskJob(TaskJob):
         self.task_job_begin()
         input_dataset = self.get_input_dataset(self.task.parameters['input'])
         output_dataset = self.create_output_dataset(name=self.task.parameters['output_dataset_name'])
-        output_file_path = os.path.join(output_dataset.data_dir, self.task.parameters['output_dataset_name'])
+        output_file_path = os.path.join(output_dataset.data_dir, self.task.parameters['output_dataset_name'] + '.nii.gz')
         d2n = dcm2nifti.Dicom2Nifti(input_dataset.data_dir, output_file_path)
         d2n.execute()
         self.create_output_file(output_file_path, output_dataset)
