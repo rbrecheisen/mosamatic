@@ -7,7 +7,7 @@ COPY requirements-web.txt /requirements.txt
 COPY create-users.txt /
 COPY docker-entrypoint.sh /
 
-RUN useradd --create-home mosamatic
+# RUN useradd --create-home mosamatic
 
 # apt-get update -y gave errors regarding NVIDIA public key
 # https://chrisjean.com/fix-apt-get-update-the-following-signatures-couldnt-be-verified-because-the-public-key-is-not-available/
@@ -23,7 +23,7 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys A4B469963BF863CC &&
     mkdir -p /data/datasets && \
     mkdir -p /data/uploads/{0..9} && chmod 777 -R /data/uploads
 
-RUN chown -R mosamatic: /data
+# RUN chown -R mosamatic: /data
 
 WORKDIR /src
 
@@ -38,6 +38,6 @@ RUN apt-get autoremove -y && \
 # RUN echo "rm -rf /src/* && rm /root/.bashrc && rm /root/.profile" > /root/.bashrc
 # RUN echo "rm -rf /src/* && rm /root/.bashrc && rm /root/.profile" > /root/.profile
 
-USER mosamatic
+# USER mosamatic
 
 CMD ["/docker-entrypoint.sh"]
