@@ -11,6 +11,8 @@ COPY docker-entrypoint.sh /
 
 # apt-get update -y gave errors regarding NVIDIA public key
 # https://chrisjean.com/fix-apt-get-update-the-following-signatures-couldnt-be-verified-because-the-public-key-is-not-available/
+# Libraries libgl1-mesa-glx and libxrender1 are needed for TotalSegmentator
+# Libraries pigz and dcm2niix are needed to convert DICOM to (compressed) NIFTI
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys A4B469963BF863CC && \
     apt-get update -y && \
     apt-get install -y vim libpq-dev pkg-config cmake openssl wget git vim && \
