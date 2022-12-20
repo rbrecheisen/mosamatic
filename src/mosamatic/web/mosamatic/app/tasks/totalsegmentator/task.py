@@ -23,7 +23,7 @@ class TotalSegmentatorTaskJob(TaskJob):
         for f in files:
             cmd = f'TotalSegmentator -i {f.path} -o {output_dataset.data_dir}'
             print(f'Running command {cmd}')
-            subprocess.check_output(cmd)
+            subprocess.check_output(cmd, shell=True)
             for f_seg in os.listdir(output_dataset.data_dir):
                 f_seg_path = os.path.join(output_dataset.data_dir, f_seg)
                 self.create_output_file(f_seg_path, output_dataset)
