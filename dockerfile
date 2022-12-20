@@ -20,6 +20,7 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys A4B469963BF863CC &&
     pip install -r /requirements.txt && \
     pip install uwsgi gunicorn && \
     mkdir -p /data/static && \
+    mkdir -p /data/datasets && \
     mkdir -p /data/uploads/{0..9} && chmod 777 -R /data/uploads
 
 RUN chown -R mosamatic: /data
