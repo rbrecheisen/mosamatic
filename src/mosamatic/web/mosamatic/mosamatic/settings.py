@@ -146,6 +146,7 @@ SESSION_SECURITY_WARN_AFTER = 840
 SESSION_SECURITY_EXPIRE_AFTER = 3600
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
+# TODO: Make this a sortable list
 TASK_TYPES = {
     'PredictBodyComposition': {
         'display_name': 'BODY COMPOSITION: Run analysis',
