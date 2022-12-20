@@ -17,9 +17,6 @@ class TotalSegmentatorTaskJob(TaskJob):
         self.task_job_begin()
         input_dataset = self.get_input_dataset(self.task.parameters['input'])
         output_dataset = self.create_output_dataset(name=self.task.parameters['output_dataset_name'])
-        result = subprocess.check_output('TotalSegmentator')
-        if result != 0:
-            raise Exception('TotalSegmentator tool not installed!')
         files = self.get_files(input_dataset)
         if len(files) > 1:
             raise Exception(f'Only one NIFTI file supported! Found {len(files)}')
