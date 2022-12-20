@@ -27,7 +27,7 @@ class TotalSegmentatorTaskJob(TaskJob):
         radiomics = self.get_bool(self.task.parameters['radiomics'])
         if radiomics:
             radiomics = '--radiomics'
-        # files = self.get_files(input_dataset)
+        files = self.get_files(input_dataset)
         cmd = f'TotalSegmentator {statistics} {radiomics} {fast} -i {files[0].path} -o {output_dataset.data_dir}'
         logger.info(f'Running command: {cmd}')
         # os.system(cmd)
