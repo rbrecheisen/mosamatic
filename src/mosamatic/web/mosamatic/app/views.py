@@ -63,8 +63,7 @@ def tasks(request):
             'task_types': backend.get_task_types(),
             'tasks': backend.get_tasks(request.user),
             'auto_refresh': backend.is_auto_refresh(request),
-    })
-
+        })
     elif request.method == 'POST':
         t = backend.create_task(request.POST.get('task_type_id'), request.user)
         return backend.render_task_page(request, t)
