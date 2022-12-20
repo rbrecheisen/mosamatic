@@ -19,12 +19,12 @@ services:
     volumes:
       - ./src/mosamatic/web/mosamatic:/src
       - data:/data
-#    deploy:
-#      resources:
-#        reservations:
-#          devices:
-#            - driver: nvidia
-#              capabilities: [gpu]
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
     depends_on:
       - db
   redis:
@@ -43,12 +43,12 @@ services:
     volumes:
       - ./src/mosamatic/web/mosamatic:/src
       - data:/data
-#    deploy:
-#      resources:
-#        reservations:
-#          devices:
-#            - driver: nvidia
-#              capabilities: [gpu]
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
     depends_on:
       - db
       - redis
