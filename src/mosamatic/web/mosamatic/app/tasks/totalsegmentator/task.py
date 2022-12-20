@@ -36,9 +36,9 @@ class TotalSegmentatorTaskJob(TaskJob):
         files = self.get_files(input_dataset)
         cmd = f'TotalSegmentator {statistics} {radiomics} {fast} -i {files[0].path} -o {output_dataset.data_dir}'
         logger.info(f'Running command: {cmd}')
-        # os.system(cmd)
-        # for f in os.listdir(output_dataset.data_dir):
-        #     f_path = os.path.join(output_dataset.data_dir, f)
-        #     self.create_output_file(f_path, output_dataset)
-        #     logger.info(f'Added {f_path}')
+        os.system(cmd)
+        for f in os.listdir(output_dataset.data_dir):
+            f_path = os.path.join(output_dataset.data_dir, f)
+            self.create_output_file(f_path, output_dataset)
+            logger.info(f'Added {f_path}')
         self.task_job_end()
