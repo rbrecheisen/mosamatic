@@ -13,9 +13,9 @@ COPY docker-entrypoint.sh /
 # https://chrisjean.com/fix-apt-get-update-the-following-signatures-couldnt-be-verified-because-the-public-key-is-not-available/
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys A4B469963BF863CC && \
     apt-get update -y && \
-    apt-get install -y vim libpq-dev pkg-config cmake openssl wget git vim  && \
+    apt-get install -y vim libpq-dev pkg-config cmake openssl wget git vim && \
     apt-get install -y libgl1-mesa-glx libxrender1 && \
-    apt-get install -y dcm2niix && \
+    apt-get install -y pigz dcm2niix && \
     pip install --upgrade pip && \
     pip install -r /requirements.txt && \
     pip install uwsgi gunicorn && \
