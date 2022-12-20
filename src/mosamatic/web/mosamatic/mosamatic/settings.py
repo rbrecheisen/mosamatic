@@ -363,7 +363,7 @@ TASK_TYPES = [
         'parameters': [
             {
                 'name': 'input',
-                'display_name': 'Flat file list for single DICOM series',
+                'display_name': 'Flat file list for single DICOM series or single NIFTI file',
                 'data_type': 'dataset',
                 'required': True,
             },

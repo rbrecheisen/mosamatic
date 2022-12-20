@@ -28,4 +28,5 @@ class TotalSegmentatorTaskJob(TaskJob):
             os.system(f'TotalSegmentator -i {f.path} -o {output_dataset.data_dir}')
             file_name = os.path.split(f.path)[1]
             self.create_output_file(os.path.join(output_dataset.data_dir, file_name), output_dataset)
+            break
         self.task_job_end()
