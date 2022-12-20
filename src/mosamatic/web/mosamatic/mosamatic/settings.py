@@ -320,7 +320,7 @@ TASK_TYPES = [
     },
     {
         'name': 'ConvertDicomToNifti',
-        'display_name': 'Convert a single DICOM series to single NIFTI',
+        'display_name': 'Convert DICOM files to NIFTI format',
         'class_path': 'app.tasks.dcm2nifti.task.DicomToNiftiTaskJob',
         'parameters': [
             {
