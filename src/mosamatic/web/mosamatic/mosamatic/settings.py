@@ -372,7 +372,7 @@ TASK_TYPES = [
                 'display_name': 'Generate low-res segmentations (if no GPU available)',
                 'data_type': 'bool',
                 'required': False,
-            }
+            },
             {
                 'name': 'statistics',
                 'display_name': 'Generate statistics (volume and mean HU)',
