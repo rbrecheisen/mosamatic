@@ -368,4 +368,22 @@ TASK_TYPES = {
             }
         ]
     },
+    'DicomToNifti': {
+        'display_name': 'DICOM: Convert a single DICOM series to single NIFTI',
+        'class_path': 'app.tasks.dcm2nifti.task.DicomToNiftiTaskJob',
+        'parameters': [
+            {
+                'name': 'input',
+                'display_name': 'DICOM series',
+                'data_type': 'dataset',
+                'required': True,
+            },
+            {
+                'name': 'output_dataset_name',
+                'display_name': 'Output dataset name',
+                'data_type': 'str',
+                'required': False,
+            }
+        ]
+    }
 }

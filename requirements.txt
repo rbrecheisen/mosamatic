@@ -8,3 +8,4 @@ matplotlib
 pillow
 pandas
 tensorflow
+barbell2
