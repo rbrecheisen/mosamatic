@@ -18,9 +18,12 @@ class TotalSegmentatorTaskJob(TaskJob):
         self.task_job_begin()
         input_dataset = self.get_input_dataset(self.task.get_param('input'))
         output_dataset = self.create_output_dataset(name=self.task.get_param('output_dataset_name'))
-        fast = self.get_bool(self.task.get_param('fast'))
+        # fast = self.get_bool(self.task.get_param('fast'))
+        fast = self.get_bool('fast')
         if fast:
             fast = '--fast'
+        else:
+            fast = '--not-fast'
         statistics = self.get_bool(self.task.get_param('statistics'))
         if statistics:
             statistics = '--statistics'
