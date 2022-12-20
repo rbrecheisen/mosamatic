@@ -26,7 +26,9 @@ class TotalSegmentatorTaskJob(TaskJob):
         for f in files:
             print(f'Processing {f.path} and segmenting structures...')
             os.system(f'TotalSegmentator -i {f.path} -o {output_dataset.data_dir}')
-            file_name = os.path.split(f.path)[1]
-            self.create_output_file(os.path.join(output_dataset.data_dir, file_name), output_dataset)
+            for f_seg in os.listdir(output_dataset.data_dir):
+                f_seg_path = os.path.join(output_dataset.data_dir, f_seg)
+                self.create_output_file(f_seg_path, output_dataset)
+                print(f'Added {f_seg_path}')
             break
         self.task_job_end()
