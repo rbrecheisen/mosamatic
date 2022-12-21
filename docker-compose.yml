@@ -65,13 +65,13 @@ services:
 volumes:
   data:
     driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: /mnt/localscratch/docker/mosamatic/data
+    # driver_opts:
+    #   type: none
+    #   o: bind
+    #   device: /mnt/localscratch/docker/mosamatic/data
   postgres_data:
     driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: /mnt/localscratch/docker/mosamatic/postgres_data
+    # driver_opts:
+    #   type: none
+    #   o: bind
+    #   device: /mnt/localscratch/docker/mosamatic/postgres_data
