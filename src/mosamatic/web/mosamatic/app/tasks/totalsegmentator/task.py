@@ -25,11 +25,11 @@ class TotalSegmentatorTaskJob(TaskJob):
         files = self.get_files(input_dataset)
         nifti_path = files[0].path
         output_dir = output_dataset.data_dir
-        totalseg = totalseg.TotalSegmentator(nifti_path, output_dir)
-        totalseg.fast = fast
-        totalseg.statistics = statistics
-        totalseg.radiomics = radiomics
-        totalseg.execute()
+        ts = totalseg.TotalSegmentator(nifti_path, output_dir)
+        ts.fast = fast
+        ts.statistics = statistics
+        ts.radiomics = radiomics
+        ts.execute()
         for f in os.listdir(output_dataset.data_dir):
             f_path = os.path.join(output_dataset.data_dir, f)
             self.create_output_file(f_path, output_dataset)
