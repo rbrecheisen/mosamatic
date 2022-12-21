@@ -1,3 +1,7 @@
+django
+django_rq
+rq
+redis
 pydicom
 numpy
 pyside6
