@@ -22,3 +22,5 @@ torch
 torchvision
 totalsegmentator
 pyradiomics
+dcmstack
+nibabel
