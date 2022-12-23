@@ -2,7 +2,7 @@ import os
 import logging
 
 from .. import TaskJob, TaskForm
-from barbell2.imaging import totalseg
+from barbell2.imaging import seg
 
 logger = logging.getLogger(__name__)
 
