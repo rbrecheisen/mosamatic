@@ -320,7 +320,7 @@ TASK_TYPES = [
     },
     {
         'name': 'ConvertDicomToNifti',
-        'display_name': 'Convert a single DICOM series to single NIFTI',
+        'display_name': 'Convert DICOM files to NIFTI format',
         'class_path': 'app.tasks.dcm2nifti.task.DicomToNiftiTaskJob',
         'parameters': [
             {
@@ -366,6 +366,24 @@ TASK_TYPES = [
                 'display_name': 'Flat file list for single DICOM series or single NIFTI file',
                 'data_type': 'dataset',
                 'required': True,
+            },
+            {
+                'name': 'fast',
+                'display_name': 'Generate low-res segmentations (if no GPU available)',
+                'data_type': 'bool',
+                'required': False,
+            },
+            {
+                'name': 'statistics',
+                'display_name': 'Generate statistics (volume and mean HU)',
+                'data_type': 'bool',
+                'required': False,
+            },
+            {
+                'name': 'radiomics',
+                'display_name': 'Generate radiomics features (requires pyradiomics)',
+                'data_type': 'bool',
+                'required': False,
             },
             {
                 'name': 'output_dataset_name',

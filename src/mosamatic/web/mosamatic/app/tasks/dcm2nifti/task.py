@@ -1,8 +1,11 @@
 import os
+import logging
 
 from .. import TaskJob, TaskForm
 from barbell2.imaging import dcm2nifti
 from barbell2.imaging.utils import is_dicom_file
+
+logger = logging.getLogger(__name__)
 
 
 class DicomToNiftiTaskForm(TaskForm):

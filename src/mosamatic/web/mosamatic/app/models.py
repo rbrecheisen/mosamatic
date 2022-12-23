@@ -58,6 +58,12 @@ class TaskModel(models.Model):
     owner = models.ForeignKey(
         User, editable=False, related_name='+', on_delete=models.CASCADE)
 
+    def get_param(self, name):
+        if name in self.parameters.keys():
+            return self.parameters[name]
+        else:
+            return None
+
 
 @receiver(models.signals.post_save, sender=DataSetModel)
 def dataset_post_save(sender, instance, **kwargs):
