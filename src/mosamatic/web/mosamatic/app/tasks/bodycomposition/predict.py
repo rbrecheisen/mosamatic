@@ -4,6 +4,7 @@ import pandas as pd
 import pydicom
 import pydicom.errors
 import logging
+from datetime import datetime
 
 from barbell2.imaging.utils import get_pixels
 from barbell2.imaging import npy2png, npy2dcm, dcm2npy
@@ -142,7 +143,7 @@ class PredictBodyCompositionTaskJob(TaskJob):
             scores['sat_area'].append(sat_area)
 
         # Build CSV for body composition scores and add to output dataset
-        csv_name = 'scores.csv'
+        csv_name = 'scores-{}.csv'.format(datetime.today().strftime('%Y%m%d-%H%M'))
         csv_path = os.path.join(output_dataset.data_dir, csv_name)
         df_scores = pd.DataFrame(data=scores)
         df_scores.to_csv(csv_path)
