@@ -423,6 +423,12 @@ TASK_TYPES = [
                 'default_value': 0.68,
                 'required': True,
             },
+            {
+                'name': 'output_dataset_name',
+                'display_name': 'Output dataset name',
+                'data_type': 'str',
+                'required': False,
+            },
         ],
     },
     {
