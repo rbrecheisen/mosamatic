@@ -1,3 +1,6 @@
+import os
+import shutil
+
 from .. import TaskJob, TaskForm
 from barbell2.imaging import selectl3
 
@@ -30,4 +33,7 @@ class SelectL3TaskJob(TaskJob):
         )
         l3_path = selector.execute()
         logger.info(f'L3 found: {l3_path}')
+        shutil.copy(l3_path, output_dataset.data_dir)
+        l3_name = os.path.split(l3_path)[1]
+        self.create_output_file(l3_name, output_dataset)
         self.task_job_end()
