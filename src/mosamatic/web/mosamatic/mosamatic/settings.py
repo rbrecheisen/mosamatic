@@ -394,6 +394,38 @@ TASK_TYPES = [
         ]
     },
     {
+        'name': 'SelectL3',
+        'display_name': 'Select L3 image from DICOM series',
+        'class_path': 'app.tasks.bodycomposition.selectl3.SelectL3TaskJob',
+        'parameters': [
+            {
+                'name': 'dicom_series',
+                'display_name': 'Dataset containing DICOM series',
+                'data_type': 'dataset',
+                'required': True,
+            },
+            {
+                'name': 'nifti_image',
+                'display_name': 'Dataset containing the NIFTI image converted from the DICOM series',
+                'data_type': 'dataset',
+                'required': True,
+            },
+            {
+                'name': 'nifti_roi',
+                'display_name': 'Dataset containing the NIFTI mask containing the L3 vertebral body',
+                'data_type': 'dataset',
+                'required': True,
+            },
+            {
+                'name': 'alpha',
+                'display_name': 'Proportion (between 0.0 and 1.0) to calculate L3 z-coordinate from min/max Z-coordinates L3 vertebral body',
+                'data_type': 'float',
+                'default_value': 0.68,
+                'required': True,
+            },
+        ],
+    },
+    {
         'name': 'ConvertDpcaExportToCastorImport',
         'display_name': 'Convert Castor DPCA export to CSVs that can be imported into Castor',
         'class_path': 'app.tasks.castor.dpca_new.ConvertDpcaExportToCastorImportTaskJob',
