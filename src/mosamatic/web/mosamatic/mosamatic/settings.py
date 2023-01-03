@@ -359,7 +359,7 @@ TASK_TYPES = [
     {
         'name': 'TotalSegmentator',
         'display_name': 'Automatically segment 104 structures in a CT scan',
-        'class_path': 'app.tasks.totalsegmentator.task.TotalSegmentatorTaskJob',
+        'class_path': 'app.tasks.totalsegmentator.run.TotalSegmentatorTaskJob',
         'parameters': [
             {
                 'name': 'input',

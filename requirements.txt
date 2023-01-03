@@ -13,3 +13,4 @@ pillow
 pandas
 tensorflow
 barbell2
+nibabel
