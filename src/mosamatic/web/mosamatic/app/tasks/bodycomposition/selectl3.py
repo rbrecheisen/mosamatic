@@ -1,6 +1,8 @@
 from .. import TaskJob, TaskForm
 from barbell2.imaging import selectl3
 
+logger = logging.getLogger(__name__)
+
 
 class SelectL3TaskForm(TaskForm):
     pass
@@ -27,4 +29,5 @@ class SelectL3TaskJob(TaskJob):
             alpha,
         )
         l3_path = selector.execute()
+        logger.info(f'L3 found: {l3_path}')
         self.task_job_end()
