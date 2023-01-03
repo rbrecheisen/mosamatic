@@ -1,5 +1,6 @@
 import os
 import shutil
+import logging
 
 from .. import TaskJob, TaskForm
 from barbell2.imaging import selectl3
