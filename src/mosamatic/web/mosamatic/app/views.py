@@ -96,3 +96,9 @@ def task(request, task_id):
     else:
         pass
     return HttpResponseForbidden('Wrong method')
+
+
+@login_required
+def viewer(request, dataset_id):
+    ds = backend.get_dataset(dataset_id, request.user)
+    return backend.render_viewer(request, ds)

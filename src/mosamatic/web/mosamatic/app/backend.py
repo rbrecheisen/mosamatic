@@ -55,6 +55,13 @@ def render_task_page(request, task):
     })
 
 
+def render_viewer(request, dataset):
+    return render(request, 'viewer.html', context={
+        'dataset': dataset,
+        'files': get_file_paths(dataset),
+    })
+
+
 def process_uploaded_files(request):
     file_paths = []
     file_names = []

@@ -10,4 +10,5 @@ urlpatterns = [
     path('datasets/<str:dataset_id>', views.dataset),
     path('tasks/', views.tasks),
     path('tasks/<str:task_id>', views.task),
+    path('viewer/<str:dataset_id>', views.viewer),
 ]
