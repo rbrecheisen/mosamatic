@@ -13,7 +13,7 @@
                 <div class="card-body" id="container"></div>
                 <script type="text/javascript" data-dataset-name="{{ dataset.name }}">
 
-                    console.log(dataset.datasetName);
+                    console.log(document.currentScript.dataset.datasetName);
 
                     const container = document.querySelector("#container");
                     const renderWindow = vtk.Rendering.Core.vtkRenderWindow.newInstance();
