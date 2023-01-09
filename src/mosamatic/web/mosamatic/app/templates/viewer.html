@@ -2,6 +2,7 @@
 {% load js %}
 {% block content %}
 <!-- https://adamj.eu/tech/2022/10/06/how-to-safely-pass-data-to-javascript-in-a-django-template/ -->
+<!-- https://stackoverflow.com/questions/14904378/get-data-attribute-of-script-tag -->
 <div class="container-fluid">
     <div class="row"><p style="margin-top: 10px"><a href="/datasets/">Back</a></p></div>
     <div class="row">
@@ -11,38 +12,10 @@
                     View <b>{{ dataset.name }}</b><br>
                 </div>
                 <div class="card-body" id="container"></div>
-                <script type="text/javascript" data-dataset-name="{{ dataset.name }}">
-
-                    console.log(document.currentScript.dataset.datasetName);
-
-                    const container = document.querySelector("#container");
-                    const renderWindow = vtk.Rendering.Core.vtkRenderWindow.newInstance();
-                    const renderer = vtk.Rendering.Core.vtkRenderer.newInstance();
-                    renderWindow.addRenderer(renderer);
-
-                    const openGLRenderWindow = vtk.Rendering.OpenGL.vtkRenderWindow.newInstance();
-                    openGLRenderWindow.setContainer(container);
-                    openGLRenderWindow.setSize(500, 500);
-                    renderWindow.addView(openGLRenderWindow);
-
-                    const interactor = vtk.Rendering.Core.vtkRenderWindowInteractor.newInstance();
-                    interactor.setView(openGLRenderWindow);
-                    interactor.initialize();
-                    interactor.bindEvents(container);
-
-                    const trackball = vtk.Interaction.Style.vtkInteractorStyleTrackballCamera.newInstance();
-                    interactor.setInteractorStyle(trackball);
-
-                    const cone = vtk.Filters.Sources.vtkConeSource.newInstance();
-                    const actor = vtk.Rendering.Core.vtkActor.newInstance();
-                    const mapper = vtk.Rendering.Core.vtkMapper.newInstance();
-
-                    actor.setMapper(mapper);
-                    mapper.setInputConnection(cone.getOutputPort());
-                    renderer.addActor(actor);
-
-                    renderer.resetCamera();
-                    renderWindow.render();
+                <script 
+                    type="text/javascript" 
+                    data-dataset-name="{{ dataset.name }}" 
+                    src="/static/viewer/simple_cone.js">
                 </script>
             </div>
         </div>
