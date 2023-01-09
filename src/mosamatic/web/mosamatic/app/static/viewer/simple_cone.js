@@ -1,5 +1,8 @@
 console.log(document.currentScript.dataset.datasetName);
 
+const width = parseInt(document.currentScript.dataset.width);
+const height = parseInt(document.currentScript.dataset.height);
+
 const container = document.querySelector("#container");
 const renderWindow = vtk.Rendering.Core.vtkRenderWindow.newInstance();
 const renderer = vtk.Rendering.Core.vtkRenderer.newInstance();
@@ -7,7 +10,7 @@ renderWindow.addRenderer(renderer);
 
 const openGLRenderWindow = vtk.Rendering.OpenGL.vtkRenderWindow.newInstance();
 openGLRenderWindow.setContainer(container);
-openGLRenderWindow.setSize(500, 500);
+openGLRenderWindow.setSize(width, height);
 renderWindow.addView(openGLRenderWindow);
 
 const interactor = vtk.Rendering.Core.vtkRenderWindowInteractor.newInstance();

@@ -11,10 +11,13 @@
                 <div class="card-header">
                     View <b>{{ dataset.name }}</b><br>
                 </div>
+                <!-- Make sure DIV dimensions match the OpenGL render window of VTK.js -->
                 <div class="card-body" id="container" style="width: 500px; height: 500px"></div>
                 <script 
                     type="text/javascript" 
                     data-dataset-name="{{ dataset.name }}" 
+                    data-width="500"
+                    data-height="500"
                     src="/static/viewer/simple_cone.js">
                 </script>
             </div>
