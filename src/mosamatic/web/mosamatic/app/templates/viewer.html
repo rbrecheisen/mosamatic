@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load js %}
 {% block content %}
+<!-- https://adamj.eu/tech/2022/10/06/how-to-safely-pass-data-to-javascript-in-a-django-template/ -->
 <div class="container-fluid">
     <div class="row"><p style="margin-top: 10px"><a href="/datasets/">Back</a></p></div>
     <div class="row">
@@ -12,7 +13,7 @@
                 <div class="card-body" id="container"></div>
                 <script type="text/javascript" data-dataset-name="{{ dataset.name }}">
 
-                    console.log(data.datasetName);
+                    console.log(dataset.datasetName);
 
                     const container = document.querySelector("#container");
                     const renderWindow = vtk.Rendering.Core.vtkRenderWindow.newInstance();
