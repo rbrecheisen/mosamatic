@@ -8,8 +8,11 @@
                 <div class="card-header">
                     View <b>{{ dataset.name }}</b><br>
                 </div>
-                <div class="card-body">
-                </div>
+                <div class="card-body" id="container"></div>
+                <script type="text/javascript">
+                    const container = document.querySelector("#container");
+                    const renderWindow = vtk.Rendering.Core.vtkRenderWindow.newInstance();
+                </script>
             </div>
         </div>
     </div>
