@@ -154,7 +154,7 @@ def get_png_urls(dataset):
     file_paths = get_file_paths(dataset)
     png_paths = []
     for f_path in file_paths:
-        d2n = dcm2npy.Dicom2Numpy(f_path)
+        d2n = dcm2npy.Dicom2Numpy(f_path.path)
         n2p = npy2png.Numpy2Png(d2n.execute())
         n2p.set_color_map('alberta')
         n2p.set_output_dir(dataset.data_dir)
