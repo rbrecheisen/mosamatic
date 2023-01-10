@@ -395,7 +395,7 @@ TASK_TYPES = [
     },
     {
         'name': 'SelectL3',
-        'display_name': 'Select L3 image from DICOM series',
+        'display_name': 'Select L3 image from L3 vertebra segmentation',
         'class_path': 'app.tasks.bodycomposition.selectl3.SelectL3TaskJob',
         'parameters': [
             {
@@ -421,6 +421,25 @@ TASK_TYPES = [
                 'display_name': 'Proportion (between 0.0 and 1.0) to calculate L3 z-coordinate from min/max Z-coordinates L3 vertebral body',
                 'data_type': 'float',
                 'default_value': 0.68,
+                'required': True,
+            },
+            {
+                'name': 'output_dataset_name',
+                'display_name': 'Output dataset name',
+                'data_type': 'str',
+                'required': False,
+            },
+        ],
+    },
+    {
+        'name': 'SelectL3All',
+        'display_name': 'Select L3 from DICOM series',
+        'class_path': 'app.tasks.bodycomposition.selectl3all.SelectL3AllTaskJob',
+        'parameters': [
+            {
+                'name': 'dicom_series',
+                'display_name': 'Dataset containing DICOM series',
+                'data_type': 'dataset',
                 'required': True,
             },
             {
