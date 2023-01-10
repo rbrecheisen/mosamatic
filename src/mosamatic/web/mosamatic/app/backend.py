@@ -59,7 +59,6 @@ def render_viewer(request, dataset):
     return render(request, 'viewer.html', context={
         'dataset': dataset,
         'files': get_file_paths(dataset),
-        'png_files': get_png_urls(dataset),
     })
 
 
@@ -148,19 +147,6 @@ def delete_dataset(dataset):
 
 def get_file_paths(dataset):
     return FilePathModel.objects.filter(dataset=dataset).all()
-
-
-def get_png_urls(dataset):
-    file_paths = get_file_paths(dataset)
-    png_paths = []
-    for f_path in file_paths:
-        d2n = dcm2npy.Dicom2Numpy(f_path.path)
-        n2p = npy2png.Numpy2Png(d2n.execute())
-        n2p.set_color_map('alberta')
-        n2p.set_output_dir(dataset.data_dir)
-        png_path = n2p.execute()
-        png_paths.append(png_path)
-    return png_paths
 
 
 def get_zip_file_from_dataset(dataset):

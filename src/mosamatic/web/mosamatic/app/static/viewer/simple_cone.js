@@ -1,5 +1,4 @@
 console.log(document.currentScript.dataset.datasetName);
-console.log(document.currentScript.dataset.pngFiles);
 
 const container = document.querySelector("#container");
 const renderWindow = vtk.Rendering.Core.vtkRenderWindow.newInstance();
