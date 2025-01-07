@@ -1,4 +1,6 @@
 import typer
+from core import controller
+
 
 app = typer.Typer()
 
@@ -10,7 +12,7 @@ def check_dicom(image_dir: str = typer.Argument(help='Directory containing the D
     created (inside image_dir) that contains the images that are not 512 by 512 pixels. These
     images you will have to rescale using the rescale_dicom command (see cli.py rescale_dicom --help)
     """
-    pass
+    controller.check_dicom()
 
 
 @app.command()
@@ -21,7 +23,7 @@ def rescale_dicom(image_dir: str = typer.Argument(help='Directory containing the
     of muscle and fat regions and calculation of body composition metrics) this may only have a small 
     effect.
     """
-    pass
+    controller.rescale_dicom()
 
 
 @app.command()
@@ -33,7 +35,7 @@ def segment_muscle_and_fat(
     Automatically annotates muscle and fat regions in the DICOM image and (optionally) saves the 
     annotation to a PNG image for easy visual checking.
     """
-    pass
+    controller.segment_muscle_and_fat()
 
 
 @app.command()
@@ -47,7 +49,7 @@ def calculate_body_composition_metrics(
     are used to limit the calculation to only muscle and fat regions. Optionally, a CSV file can be 
     specified containing patient heights in mm^2. The format should be <file name>, <height>.
     """
-    pass
+    controller.calculate_body_composition_metrics()
 
 
 if __name__ == '__main__':
