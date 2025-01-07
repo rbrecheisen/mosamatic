@@ -1,0 +1,23 @@
+# pyproject.toml
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mosamatic"
+version = "0.3.0"
+authors = [
+  { name="Ralph Brecheisen", email="r.brecheisen@maastrichtuniversity.nl" }
+]
+description = "A multi-UI Python application with background tasks."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "huey",
+  "wxPython",
+  "typer",
+]
+
+[project.scripts]
+mosamatic = "mosamatic.main:main"
+mosamatic-cli = "mosamatic.cli:main"
