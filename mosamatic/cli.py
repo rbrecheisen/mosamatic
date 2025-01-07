@@ -1,5 +1,6 @@
 import typer
-from core import controller
+
+from .core import controller
 
 
 app = typer.Typer()

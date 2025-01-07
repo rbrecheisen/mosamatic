@@ -3,9 +3,16 @@
 requires = ["setuptools>=42", "wheel"]
 build-backend = "setuptools.build_meta"
 
+[tool.setuptools]
+packages = [
+  "mosamatic",
+  "mosamatic.core",
+  "mosamatic.ui",
+]
+
 [project]
 name = "mosamatic"
-version = "0.3.0"
+version = "0.6.0"
 authors = [
   { name="Ralph Brecheisen", email="r.brecheisen@maastrichtuniversity.nl" }
 ]
@@ -19,5 +26,5 @@ dependencies = [
 ]
 
 [project.scripts]
-mosamatic = "mosamatic.main:main"
-mosamatic-cli = "mosamatic.cli:main"
+mosamatic = "mosamatic.main:app"
+mosamatic-cli = "mosamatic.cli:app"
