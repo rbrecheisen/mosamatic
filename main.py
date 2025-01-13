@@ -1,11 +1,11 @@
 from tkinter import Tk
 
-from mosamatic.controller import AppController
+from mosamatic.controller import Controller
 
 
 def main():
     root = Tk()
-    AppController(root)
+    controller = Controller(root)
     root.mainloop()
 
 

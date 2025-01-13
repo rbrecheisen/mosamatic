@@ -2,7 +2,7 @@ import time
 import threading
 
 
-class AppModel:
+class Processing:
     def __init__(self, root):
         self.root = root
 

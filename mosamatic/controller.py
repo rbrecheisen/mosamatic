@@ -1,13 +1,13 @@
-from mosamatic.model import AppModel
-from mosamatic.view import AppView
+from mosamatic.processing import Processing
+from mosamatic.view import View
 
 
-class AppController:
+class Controller:
     def __init__(self, root):
-        self.model, self.view = AppModel(root), AppView(root, self)
+        self.processing, self.view = Processing(root), View(root, self)
 
     def start_task(self):
-        self.model.run_task(self.on_progress)
+        self.processing.run_task(self.on_progress)
 
     def on_progress(self, progress):
         self.view.update_progress(progress)

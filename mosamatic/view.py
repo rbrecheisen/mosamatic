@@ -3,7 +3,7 @@ import tkinter as tk
 from tkinter import ttk
 
 
-class AppView:
+class View:
     def __init__(self, root, controller):
         self.controller = controller
         self.setup_ui(root)

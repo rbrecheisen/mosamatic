@@ -1,15 +1,13 @@
 from tkinter import Tk
 
-from mosamatic.controller import AppController
-from multiprocessing import set_start_method
+from mosamatic.controller import Controller
 
 
 def main():
     root = Tk()
-    AppController(root)
+    controller = Controller(root)
     root.mainloop()
 
 
 if __name__ == "__main__":
-    set_start_method('spawn')
     main()
