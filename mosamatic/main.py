@@ -1,6 +1,13 @@
-def app():
-    print('Running mosamatic...')
+from tkinter import Tk
+
+from controller import AppController
 
 
-if __name__ == '__main__':
-    app()
+def main():
+    root = Tk()
+    app = AppController(root)
+    root.mainloop()
+
+
+if __name__ == "__main__":
+    main()
