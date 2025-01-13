@@ -9,7 +9,7 @@ class AppView:
         self.setup_ui(root)
 
     def setup_ui(self, root):
-        root.title("My Tkinter MVC App")
+        root.title("Mosamatic")
         root.geometry("400x200")
 
         self.label = tk.Label(root, text="Progress:")
