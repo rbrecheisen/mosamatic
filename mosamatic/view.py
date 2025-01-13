@@ -8,6 +8,10 @@ class View:
         self.controller = controller
         self.setup_ui(root)
 
+    def handle_button_click(self):
+        file_dir = 'D:\\Mosamatic\\AutoSliceSelectionBibiToine\\L3s'
+        self.controller.decompress_dicom(file_dir)
+
     def setup_ui(self, root):
         root.title("Mosamatic")
         root.geometry("400x200")
@@ -19,7 +23,7 @@ class View:
         self.progress_bar.pack(pady=10)
 
         self.start_button = ttk.Button(
-            root, text="Start Task", command=self.controller.start_task
+            root, text='Decompress DICOM', command=self.handle_button_click
         )
         self.start_button.pack(pady=10)
 
