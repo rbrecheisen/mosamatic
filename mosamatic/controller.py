@@ -1,5 +1,5 @@
-from model import AppModel
-from view import AppView
+from mosamatic.model import AppModel
+from mosamatic.view import AppView
 
 
 class AppController:

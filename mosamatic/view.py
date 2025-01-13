@@ -19,7 +19,7 @@ class AppView:
         self.progress_bar.pack(pady=10)
 
         self.start_button = ttk.Button(
-            root, text="Start Task", command=self.controller.start_background_task
+            root, text="Start Task", command=self.controller.start_task
         )
         self.start_button.pack(pady=10)
 

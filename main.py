@@ -1,7 +1,6 @@
 from tkinter import Tk
 
 from mosamatic.controller import AppController
-from multiprocessing import set_start_method
 
 
 def main():
@@ -11,5 +10,4 @@ def main():
 
 
 if __name__ == "__main__":
-    set_start_method('spawn')
     main()
