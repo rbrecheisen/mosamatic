@@ -1,3 +1,0 @@
-huey
-wxpython
-typer
